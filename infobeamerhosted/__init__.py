@@ -1,5 +1,4 @@
-from API import *
-
+from Infobeamer import *
 
 if __name__ == '__main__':
     import argparse
@@ -18,5 +17,4 @@ if __name__ == '__main__':
     API_URL = os.environ.get('API_URL') or args.api_url
     API_USER = os.environ.get('API_USER') or args.api_user
 
-    ibh = Infobeamer(API_URL, API_USER, API_KEY)
-    logger.info(ibh.query())
+    ibh = Infobeamer(API_KEY)
