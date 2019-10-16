@@ -18,4 +18,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import argparse
+import os
+import logging
+
+from infobeamerhosted.API import *
 from infobeamerhosted.Infobeamer import *
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+logger.info('Script is executed as standalone file.')
+
+# Parse arguments for CLI use.
+parser = argparse.ArgumentParser()
+parser.add_argument('--api-key', type=str, help='API Key.')
+parser.add_argument('--api-user', type=str, default='', help='API User.')
+parser.add_argument('--api-url', type=str, default='https://info-beamer.com/api/v1/', help='API URL.')
+args = parser.parse_args()
+
+InfobeamerAPI.KEY = os.environ.get('API_KEY') or args.api_key
+InfobeamerAPI.URL = os.environ.get('API_URL') or args.api_url
+InfobeamerAPI.USER = os.environ.get('API_USER') or args.api_user
+
+if __name__ == '__main__':
+    ibh = Infobeamer()

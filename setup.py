@@ -11,7 +11,7 @@ setuptools.setup(
     description='Python wrapper around the Info Beamer Hosted API.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://hertz-gitlab.zkm.de/rapid-prototyping-lab/python-modules/pypi-infobeamerhosted/',
+    url='https://github.com/zkmkarlsruhe/pypi-infobeamerhosted',
     packages=setuptools.find_packages(),
     classifiers=[
         'Programming Language :: Python :: 3',

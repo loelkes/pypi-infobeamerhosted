@@ -13,6 +13,7 @@ python -m infobeamerhosted
 
 ```
 from infobeamerhosted import *
+InfobeamerAPI.KEY = 'your info beamer api key here'
 foo = Infobeamer()
 ```
 
@@ -47,6 +48,14 @@ foo = Infobeamer()
 * ```.inGroup(name: str) -> bool``` return True if the Item is in the group with the name *name*.
 * ```.update([option: str, payload: dict]) -> bool```. Returns True if successfull, False otherwise.
 * ```.delete() -> bool``` deletes the item. Returns True if successfull, False otherwise.
+
+### InfobeamerAPI()
+
+#### Static Properties
+
+* ```InfobeamerAPI.KEY```holds our API key (required).
+* ```InfobeamerAPI.USER```holds the username for the API. Default is set to ''.
+* ```InfobeamerAPI.URL```holds the API URL. Default is set to https://info-beamer.com/api/v1/.
 
 ## Standalone use
 

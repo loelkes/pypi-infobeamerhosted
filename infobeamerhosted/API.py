@@ -23,11 +23,15 @@ import os
 import json
 import logging
 
-from Exceptions import *
+from infobeamerhosted.Exceptions import *
 
 logger = logging.getLogger(__name__)
 
 class InfobeamerAPI:
+    KEY = False
+    URL = 'https://info-beamer.com/api/v1/'
+    USER = ''
+
     def __init__(self, key=False, user=False, url=False):
         self.user = user or InfobeamerAPI.USER
         self.key = key or InfobeamerAPI.KEY
@@ -58,7 +62,7 @@ class InfobeamerAPI:
 
     @property
     def url(self) -> str:
-        return self.__api_url or 'https://info-beamer.com/api/v1/'
+        return self.__api_url
 
     @url.setter
     def url(self, value: str):

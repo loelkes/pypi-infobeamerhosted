@@ -20,7 +20,7 @@
 
 from threading import Thread
 from queue import Queue
-from API import InfobeamerAPI
+from infobeamerhosted.API import InfobeamerAPI
 
 import logging
 logger = logging.getLogger(__name__)
