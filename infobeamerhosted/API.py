@@ -1,3 +1,23 @@
+# Copyright 2019 Christian Lölkes
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 import requests
 import os
 import json
@@ -9,10 +29,9 @@ logger = logging.getLogger(__name__)
 
 class InfobeamerAPI:
     def __init__(self, key=False, user=False, url=False):
-        self.user = user
-        self.key = key
-        self.url = url
-        self.task_num = 5
+        self.user = user or InfobeamerAPI.USER
+        self.key = key or InfobeamerAPI.KEY
+        self.url = url or InfobeamerAPI.URL
 
     def setupRequests(self):
         self.status = False
@@ -56,15 +75,14 @@ class InfobeamerAPI:
     def query(self, endpoint='ping', method='GET', payload={}):
         result = None
         self.status = False
+        if method not in ['GET', 'POST', 'DELETE']:
+            raise APIError()
         if method is 'GET':
-            result = requests.get(f'{self.url}{endpoint}',
-                auth=self.auth, params=payload)
+            result = requests.get(f'{self.url}{endpoint}', auth=self.auth, params=payload)
         elif method is 'POST':
-            result = requests.post(f'{self.url}{endpoint}',
-                auth=self.auth, data=payload)
+            result = requests.post(f'{self.url}{endpoint}', auth=self.auth, data=payload)
         elif method is 'DELETE':
-            result = requests.delete(f'{self.url}{endpoint}',
-                auth=self.auth, data=payload)
+            result = requests.delete(f'{self.url}{endpoint}', auth=self.auth, data=payload)
         if result.status_code == requests.codes.ok:
             self.status = True
             self.response = result.json()
